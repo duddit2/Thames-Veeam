@@ -26,6 +26,31 @@
 
 
             }
+        },
+        "sa02":{
+            "value": {
+                "name": "veeamstor00001",
+                "kind": "StorageV2",
+                "location": "ukwest",
+                "sku":"Standard_LRS",
+                "accesstier": "Hot",
+
+                "dnsEndpointType": "Standard",
+                "defaultToOAuthAuthentication":"false",
+                "publicNetworkAccess": "Enabled",
+                "allowCrossTenantReplication":"true",
+                "minimumTlsVersion": "TLS1_2",
+                "allowBlobPublicAccess": "false",
+                "allowSharedKeyAccess": "true",
+                "largeFileSharesState": "Enabled",
+
+                "VNETID": "/subscriptions/c6666fd5-5c50-4926-8f6b-68b42b3b98b1/resourceGroups/PaulsAzureDeployment/providers/Microsoft.Network/virtualNetworks/VNET-UKSouth-Spoke/subnets/SN-Web"
+                
+
+
+
+
+            }
         }
 
     }

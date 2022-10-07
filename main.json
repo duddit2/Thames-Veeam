@@ -4,25 +4,49 @@
     "parameters": {
         "sa01": {
             "type":"object"
+        },
+        "sa02": {
+            "type":"object"
         }
     },
+
+
     "variables": {
     },
+
+
     "resources": [
-    {
-      "name": "UKSouth-StorageAccount",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2021-04-01",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "relativePath": "storage.json"
-        },
-        "parameters": {
-          "sa01": {
-            "value": "[parameters('sa01')]"
-          }
+        {
+        "name": "UKSouth-StorageAccount",
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2021-04-01",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+            "relativePath": "storageWithFileShares.json"
+            },
+            "parameters": {
+            "sa01": {
+                "value": "[parameters('sa01')]"
+            }
+            }
         }
-      }
-    }]
+        },
+        {
+        "name": "UKwest-StorageAccount",
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2021-04-01",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+            "relativePath": "storageWithBlob.json"
+            },
+            "parameters": {
+            "sa02": {
+                "value": "[parameters('sa02')]"
+            }
+            }
+        }
+        }
+    ]
 }

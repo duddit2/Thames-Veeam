@@ -10,7 +10,7 @@
                         "value": {
                             "name": "thamesveeamukwest001sa",
                             "kind": "StorageV2",
-                            "location": "uksouth",
+                            "location": "ukwest",
                             "sku":"Standard_LRS",
                             "accesstier": "Hot",
                             "dnsEndpointType": "Standard",

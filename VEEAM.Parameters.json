@@ -2,14 +2,20 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "UKWestVMSubnetID":{
+            "value": "/subscriptions/c6666fd5-5c50-4926-8f6b-68b42b3b98b1/resourceGroups/PaulsAzureDeployment/providers/Microsoft.Network/virtualNetworks/VNET-UKSouth-Spoke/subnets/SN-Web"
+        },
+        "UKSouthVMSubnetID":{
+            "value": "/subscriptions/c6666fd5-5c50-4926-8f6b-68b42b3b98b1/resourceGroups/PaulsAzureDeployment/providers/Microsoft.Network/virtualNetworks/VNET-UKSouth-Spoke/subnets/SN-Web"
+        },
         "sa01":{
+
             "value": {
-                "name": "veeamstor00001",
+                "name": "veeamsauksouth",
                 "kind": "StorageV2",
                 "location": "uksouth",
                 "sku":"Standard_LRS",
                 "accesstier": "Hot",
-
                 "dnsEndpointType": "Standard",
                 "defaultToOAuthAuthentication":"false",
                 "publicNetworkAccess": "Enabled",
@@ -17,24 +23,18 @@
                 "minimumTlsVersion": "TLS1_2",
                 "allowBlobPublicAccess": "false",
                 "allowSharedKeyAccess": "true",
-                "largeFileSharesState": "Enabled",
-
-                "VNETID": "/subscriptions/c6666fd5-5c50-4926-8f6b-68b42b3b98b1/resourceGroups/PaulsAzureDeployment/providers/Microsoft.Network/virtualNetworks/VNET-UKSouth-Spoke/subnets/SN-Web"
+                "largeFileSharesState": "Enabled"
                 
-
-
-
-
+                
             }
         },
         "sa02":{
             "value": {
-                "name": "veeamstor00001",
+                "name": "veeamsaukwest",
                 "kind": "StorageV2",
                 "location": "ukwest",
                 "sku":"Standard_LRS",
                 "accesstier": "Hot",
-
                 "dnsEndpointType": "Standard",
                 "defaultToOAuthAuthentication":"false",
                 "publicNetworkAccess": "Enabled",
@@ -42,14 +42,42 @@
                 "minimumTlsVersion": "TLS1_2",
                 "allowBlobPublicAccess": "false",
                 "allowSharedKeyAccess": "true",
-                "largeFileSharesState": "Enabled",
+                "largeFileSharesState": "Enabled"
+            
+            }
+        },
+        "VeeamBackupServer":{
+            "value":  {
+                "name": "VeeamBackupServer",
+                "location": "uksouth",
+                "enableAcceleratedNetworking": true,
+                "zones": 1,
+                "vmSize": "",
+                "sku": "",
+                "osDiskstoragetype": "",
+                "computerName": "",
+                "adminusername": "",
+                "adminpassword": ""
 
-                "VNETID": "/subscriptions/c6666fd5-5c50-4926-8f6b-68b42b3b98b1/resourceGroups/PaulsAzureDeployment/providers/Microsoft.Network/virtualNetworks/VNET-UKSouth-Spoke/subnets/SN-Web"
-                
-
-
-
-
+            }
+        },
+        "VeeamRepoServer":{
+            "value":  {
+                "name": "VeeamRepoServer",
+                "location": "uksouth",
+                "enableAcceleratedNetworking": true,
+                "zones": 1,
+                "vmSize": "",
+                "sku": "",
+                "osDiskstoragetype": "",
+                "computerName": "",
+                "adminusername": "",
+                "adminpassword": ""
+            }
+        },
+        "SQL":{
+            "value": {
+                "location": "uksouth"
             }
         }
 

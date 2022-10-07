@@ -1,0 +1,104 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "VeeamBackupServer": {
+            "type":"object"
+        },
+        "VeeamRepoServer": {
+            "type":"object"
+        },
+        "UKSouthVMSubnetID": {
+            "type":"string"
+        
+        }
+    },
+
+    "variables": {
+    },
+
+    "resources": [
+        
+        {
+        "type": "Microsoft.Network/networkInterfaces",
+        "apiVersion": "2020-11-01",
+        "name": "[format('{0}-nic', parameters('VeeamBackupServer').name)]",
+        "location": "[parameters('VeeamBackupServer').location]",
+        "properties": {
+            "ipConfigurations": [
+            {
+                "name": "ipconfig1",
+                "properties": {
+                "subnet": {
+                    "id": "[reference(resourceId('Microsoft.Network/virtualNetworks', parameters('VeeamBackupServer').subnet))]"
+                },
+                "privateIPAllocationMethod": "Dynamic"
+                
+                }
+            }
+            ],
+            "enableAcceleratedNetworking": "[parameters('VeeamBackupServer').enableAcceleratedNetworking]"
+            
+        }
+        
+        },
+        {
+        "type": "Microsoft.Compute/virtualMachines",
+        "apiVersion": "2021-07-01",
+        "name": "[parameters('VeeamBackupServer').name]",
+        "location": "[parameters('VeeamBackupServer').location]",
+        "zones": [
+            "[parameters('VeeamBackupServer').zones]"
+        ],
+        "properties": {
+            "hardwareProfile": {
+            "vmSize": "[parameters('VeeamBackupServer').vmSize]"
+            },
+            "storageProfile": {
+            "imageReference": {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "[parameters('VeeamBackupServer').sku]",
+                "version": "latest"
+            },
+            "osDisk": {
+                "createOption": "FromImage",
+                "managedDisk": {
+                "storageAccountType": "[parameters('VeeamBackupServer').osDiskstoragetype]"
+                }
+            },
+            "dataDisks": [
+                {
+                "diskSizeGB": 1023,
+                "lun": 0,
+                "createOption": "Empty"
+                }
+            ]
+            },
+            "networkProfile": {
+            "networkInterfaces": [
+                {
+                "id": "[resourceId('Microsoft.Network/networkInterfaces', format('{0}-nic', parameters('VeeamBackupServer').name))]"
+                }
+            ]
+            },
+            "osProfile": {
+            "computerName": "[parameters('VeeamBackupServer').computerName]",
+            "adminUsername": "[parameters('VeeamBackupServer').adminUsername]",
+            "adminPassword": "[parameters('VeeamBackupServer').adminPassword]",
+            "windowsConfiguration": {
+                "enableAutomaticUpdates": true
+            }
+            },
+            "diagnosticsProfile": {
+            "bootDiagnostics": {
+                "enabled": true
+            }
+            }
+        },
+        "dependsOn": [
+            "[resourceId('Microsoft.Network/networkInterfaces', format('{0}-nic', parameters('VeeamBackupServer').name))]"
+        ]
+        }
+    ]
+}

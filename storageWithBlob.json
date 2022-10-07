@@ -4,6 +4,9 @@
     "parameters": {
         "sa02": {
             "type":"object"
+        },
+        "UKSouthVMSubnetID": {
+            "type":"string"
         }
     },
     "variables": {
@@ -31,7 +34,7 @@
                     "bypass": "AzureServices",
                     "virtualNetworkRules": [
                         {
-                            "id": "[parameters('sa02').VNETID]",
+                            "id": "[parameters('UKSouthVMSubnetID')]",
                             "action": "Allow"
                         }
                     ],

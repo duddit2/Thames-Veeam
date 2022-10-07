@@ -2,15 +2,34 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "sa01": {
+            "type":"object"
+        },
         "sa02": {
             "type":"object"
         },
         "UKSouthVMSubnetID": {
             "type":"string"
+        },
+        "UKWestVMSubnetID": {
+            "type":"string"
+        },
+        "SQL": {
+            "type":"object"
+        },
+        "VeeamBackupServer": {
+            "type":"object"
+        },
+        "VeeamRepoServer": {
+            "type":"object"
         }
     },
+
+
     "variables": {
     },
+
+
     "resources": [
         {
             "type": "Microsoft.Storage/storageAccounts",

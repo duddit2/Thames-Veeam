@@ -40,6 +40,9 @@
             "templateLink": {
             "uri": "https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/storageWithFileShares.json"
             },
+            "parametersLink": {
+                "uri": "https://raw.githubusercontent.com/duddit2/ "
+            },
             "parameters": {
             "sa01": {
                 "value": "[parameters('sa01')]"

@@ -32,11 +32,6 @@
                 "adminusername": "",
                 "adminpassword": ""
             }
-        },
-        "SQL":{
-            "value": {
-                "location": "uksouth"
-            }
         }
 
     }

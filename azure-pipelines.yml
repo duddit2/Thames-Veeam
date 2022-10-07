@@ -23,19 +23,7 @@ steps:
     resourceGroupName: 'deployments'
     location: 'UK South'
     templateLocation: 'URL of the file'
-    csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/storageWithFileShares.json'
-    csmParametersFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/sa01.parameters.json'
+    csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/Storage.json'
+    csmParametersFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/Storage.parameters.json'
     deploymentMode: 'Incremental'
 
-- task: AzureResourceManagerTemplateDeployment@3
-  inputs:
-    deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: 'thamespipeline'
-    subscriptionId: 'afdc32d4-a9f7-4ea6-9bff-e8c5aa1ed52f'
-    action: 'Create Or Update Resource Group'
-    resourceGroupName: 'deployments'
-    location: 'UK South'
-    templateLocation: 'URL of the file'
-    csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/storageWithBlob.json'
-    csmParametersFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/sa02.parameters.json'
-    deploymentMode: 'Incremental'

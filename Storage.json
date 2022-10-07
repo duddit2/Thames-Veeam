@@ -5,6 +5,9 @@
         "sa01": {
             "type":"object"
         },
+        "sa02": {
+            "type":"object"
+        },
         
         "UKSouthVMSubnetID": {
             "type":"string"
@@ -130,6 +133,84 @@
             "copy": {
                 "name": "shares",
                 "count": 4
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2021-09-01",
+            "name": "[parameters('sa02').name]",
+            "location": "[parameters('sa02').location]",
+            "sku": {
+                "name": "[parameters('sa02').sku]",
+                "tier": "Standard"
+            },
+            "kind": "[parameters('sa02').kind]",
+            "properties": {
+                "dnsEndpointType": "[parameters('sa02').dnsEndpointType]",
+                "defaultToOAuthAuthentication": "[parameters('sa02').defaultToOAuthAuthentication]",
+                "publicNetworkAccess": "[parameters('sa02').publicNetworkAccess]",
+                "minimumTlsVersion": "[parameters('sa02').minimumTlsVersion]",
+                "allowBlobPublicAccess": "[parameters('sa02').allowBlobPublicAccess]",
+                "allowSharedKeyAccess": "[parameters('sa02').allowSharedKeyAccess]",
+                "largeFileSharesState": "[parameters('sa02').largeFileSharesState]",
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [
+                        {
+                            "id": "[parameters('UKSouthVMSubnetID')]",
+                            "action": "Allow"
+                        }
+                    ],
+                    "ipRules": [],
+                    "defaultAction": "Deny"
+                },
+                "supportsHttpsTrafficOnly": true,
+                "encryption": {
+                    "requireInfrastructureEncryption": false,
+                    "services": {
+                        "file": {
+                            "keyType": "Account",
+                            "enabled": true
+                        },
+                        "blob": {
+                            "keyType": "Account",
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                },
+                "accessTier": "[parameters('sa02').accesstier]"
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/blobServices",
+            "apiVersion": "2021-09-01",
+            "name": "[concat(parameters('sa02').name, '/default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('sa02').name)]"
+            ],
+            "sku": {
+                "name": "[parameters('sa02').sku]",
+                "tier": "Standard"
+            },
+            "properties": {
+                "cors": {
+                    "corsRules": []
+                },
+                "deleteRetentionPolicy": {
+                    "allowPermanentDelete": false,
+                    "enabled": false
+                },
+                "isVersioningEnabled": false,
+                "changeFeed": {
+                    "enabled": false
+                },
+                "restorePolicy": {
+                    "enabled": false
+                },
+                "containerDeleteRetentionPolicy": {
+                    "enabled": false
+                }
             }
         }
     ]

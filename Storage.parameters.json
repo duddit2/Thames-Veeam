@@ -24,6 +24,26 @@
                             
                             
                         }
+                    },
+                    "sa02":{
+
+                        "value": {
+                            "name": "thamesveeamukwest001sa",
+                            "kind": "StorageV2",
+                            "location": "ukwest",
+                            "sku":"Standard_LRS",
+                            "accesstier": "Hot",
+                            "dnsEndpointType": "Standard",
+                            "defaultToOAuthAuthentication":"false",
+                            "publicNetworkAccess": "Enabled",
+                            "allowCrossTenantReplication":"true",
+                            "minimumTlsVersion": "TLS1_2",
+                            "allowBlobPublicAccess": "false",
+                            "allowSharedKeyAccess": "true",
+                            "largeFileSharesState": "Enabled"
+                            
+                            
+                        }
                     }
     
     }

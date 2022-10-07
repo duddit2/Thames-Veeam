@@ -2,7 +2,9 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-
+        "UKSouthVMSubnetID":{
+                    "value": "/subscriptions/c6666fd5-5c50-4926-8f6b-68b42b3b98b1/resourceGroups/PaulsAzureDeployment/providers/Microsoft.Network/virtualNetworks/VNET-UKSouth-Spoke/subnets/SN-Web"
+                    },
                     "sa01":{
 
                         "value": {
@@ -21,8 +23,8 @@
                             "largeFileSharesState": "Enabled"
                             
                             
-                                }
-                            }
+                        }
+                    }
     
-                }
+    }
 }

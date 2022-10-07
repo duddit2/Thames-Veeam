@@ -1,0 +1,32 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sa01":{
+            "value": {
+                "name": "veeamstor00001",
+                "kind": "StorageV2",
+                "location": "uksouth",
+                "sku":"Standard_LRS",
+                "accesstier": "Hot",
+
+                "dnsEndpointType": "Standard",
+                "defaultToOAuthAuthentication":"false",
+                "publicNetworkAccess": "Enabled",
+                "allowCrossTenantReplication":"true",
+                "minimumTlsVersion": "TLS1_2",
+                "allowBlobPublicAccess": "false",
+                "allowSharedKeyAccess": "true",
+                "largeFileSharesState": "Enabled",
+
+                "VNETID": "/subscriptions/c6666fd5-5c50-4926-8f6b-68b42b3b98b1/resourceGroups/PaulsAzureDeployment/providers/Microsoft.Network/virtualNetworks/VNET-UKSouth-Spoke/subnets/SN-Web"
+                
+
+
+
+
+            }
+        }
+
+    }
+}

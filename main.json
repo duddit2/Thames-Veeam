@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sa01": {
+            "type":"object"
+        }
+    },
+    "variables": {
+    },
+    "resources": [
+    {
+      "name": "UKSouth-StorageAccount",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2021-04-01",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "relativePath": "storage.json"
+        },
+        "parameters": {
+          "sa01": {
+            "value": "[parameters('sa01')]"
+          }
+        }
+      }
+    }]
+}

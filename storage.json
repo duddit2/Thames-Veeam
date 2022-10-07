@@ -1,0 +1,128 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sa01": {
+            "type":"object"
+        }
+    },
+    "variables": {
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2021-09-01",
+            "name": "[parameters('sa01').name]",
+            "location": "[parameters('sa01').location]",
+            "sku": {
+                "name": "[parameters('sa01').sku]",
+                "tier": "Standard"
+            },
+            "kind": "[parameters('sa01').kind]",
+            "properties": {
+                "dnsEndpointType": "[parameters('sa01').dnsEndpointType]",
+                "defaultToOAuthAuthentication": "[parameters('sa01').defaultToOAuthAuthentication]",
+                "publicNetworkAccess": "[parameters('sa01').publicNetworkAccess]",
+                "minimumTlsVersion": "[parameters('sa01').minimumTlsVersion]",
+                "allowBlobPublicAccess": "[parameters('sa01').allowBlobPublicAccess]",
+                "allowSharedKeyAccess": "[parameters('sa01').allowSharedKeyAccess]",
+                "largeFileSharesState": "[parameters('sa01').largeFileSharesState]",
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [
+                        {
+                            "id": "[parameters('sa01').VNETID]",
+                            "action": "Allow"
+                        }
+                    ],
+                    "ipRules": [],
+                    "defaultAction": "Deny"
+                },
+                "supportsHttpsTrafficOnly": true,
+                "encryption": {
+                    "requireInfrastructureEncryption": false,
+                    "services": {
+                        "file": {
+                            "keyType": "Account",
+                            "enabled": true
+                        },
+                        "blob": {
+                            "keyType": "Account",
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                },
+                "accessTier": "[parameters('sa01').accesstier]"
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/blobServices",
+            "apiVersion": "2021-09-01",
+            "name": "[concat(parameters('sa01').name, '/default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('sa01').name)]"
+            ],
+            "sku": {
+                "name": "[parameters('sa01').sku]",
+                "tier": "Standard"
+            },
+            "properties": {
+                "cors": {
+                    "corsRules": []
+                },
+                "deleteRetentionPolicy": {
+                    "allowPermanentDelete": false,
+                    "enabled": false
+                },
+                "isVersioningEnabled": false,
+                "changeFeed": {
+                    "enabled": false
+                },
+                "restorePolicy": {
+                    "enabled": false
+                },
+                "containerDeleteRetentionPolicy": {
+                    "enabled": false
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/fileServices",
+            "apiVersion": "2021-09-01",
+            "name": "[concat(parameters('sa01').name, '/default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('sa01').name)]"
+            ],
+            "sku": {
+                "name": "[parameters('sa01').sku]",
+                "tier": "Standard"
+            },
+            "properties": {
+                
+                "shareDeleteRetentionPolicy": {
+                    "enabled": true,
+                    "days": 7
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+            "apiVersion": "2021-09-01",
+            "name": "[concat(parameters('sa01').name,'/default/veeamrepo00',copyIndex())]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', parameters('sa01').name, 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('sa01').name)]"
+            ],
+            "properties": {
+                "accessTier": "Hot",
+                "shareQuota": 102400,
+                "enabledProtocols": "SMB"
+            },
+            "copy": {
+                "name": "shares",
+                "count": 4
+            }
+        }
+    ]
+}

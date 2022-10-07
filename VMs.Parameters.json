@@ -3,7 +3,9 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         
-        
+        "UKSouthVMSubnetID": {
+            "value": "string"
+        },
         "VeeamBackupServer":{
             "value":  {
                 "name": "VeeamBackupServer",

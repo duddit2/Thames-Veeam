@@ -30,7 +30,7 @@
                 "name": "ipconfig1",
                 "properties": {
                 "subnet": {
-                    "id": "[reference(resourceId('Microsoft.Network/virtualNetworks', parameters('VeeamBackupServer').subnet))]"
+                    "id": "[reference(resourceId('Microsoft.Network/virtualNetworks', parameters('UKSouthVMSubnetID')))]"
                 },
                 "privateIPAllocationMethod": "Dynamic"
                 

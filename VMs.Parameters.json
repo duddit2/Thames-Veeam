@@ -10,7 +10,7 @@
             "value":  {
                 "name": "VeeamBackupServer",
                 "location": "uksouth",
-                "enableAcceleratedNetworking": true,
+                "enableAcceleratedNetworking": false,
                 "zones": 1,
                 "vmSize": "",
                 "sku": "",
@@ -25,7 +25,7 @@
             "value":  {
                 "name": "VeeamRepoServer",
                 "location": "uksouth",
-                "enableAcceleratedNetworking": true,
+                "enableAcceleratedNetworking": false,
                 "zones": 1,
                 "vmSize": "",
                 "sku": "",

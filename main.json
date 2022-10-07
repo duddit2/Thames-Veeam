@@ -38,11 +38,12 @@
         "properties": {
             "mode": "Incremental",
             "templateLink": {
-            "uri": "https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/storageWithFileShares.json"
+                "relativePath": "storageWithFileShares.json"
+                //"uri": "https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/storageWithFileShares.json"
             },
-            "parametersLink": {
+            /* "parametersLink": {
                 "uri": "https://raw.githubusercontent.com/duddit2/ "
-            },
+            }, */
             "parameters": {
             "sa01": {
                 "value": "[parameters('sa01')]"
@@ -60,7 +61,8 @@
         "properties": {
             "mode": "Incremental",
             "templateLink": {
-            "uri": "https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/storageWithBlob.json"
+                "relativePath": "storageWithBlob.json"
+                //"uri": "https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/storageWithBlob.json"
             },
             "parameters": {
             "sa02": {

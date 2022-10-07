@@ -5,23 +5,9 @@
         "sa01": {
             "type":"object"
         },
-        "sa02": {
-            "type":"object"
-        },
+        
         "UKSouthVMSubnetID": {
             "type":"string"
-        },
-        "UKWestVMSubnetID": {
-            "type":"string"
-        },
-        "SQL": {
-            "type":"object"
-        },
-        "VeeamBackupServer": {
-            "type":"object"
-        },
-        "VeeamRepoServer": {
-            "type":"object"
         }
     },
 

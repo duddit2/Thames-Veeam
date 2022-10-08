@@ -22,7 +22,7 @@
         {
         "type": "Microsoft.Network/networkInterfaces",
         "apiVersion": "2020-11-01",
-        "name": "[format('{0}-nic', parameters('VeeamBackupServer').name)]",
+        "name": "[concat(parameters('VeeamBackupServer').name,'-nic-01')]",
         "location": "[parameters('VeeamBackupServer').location]",
         "properties": {
             "ipConfigurations": [
@@ -30,7 +30,7 @@
                 "name": "ipconfig1",
                 "properties": {
                 "subnet": {
-                    "id": "[reference(resourceId('Microsoft.Network/virtualNetworks', parameters('UKSouthVMSubnetID')))]"
+                    "id": "[parameters('UKSouthVMSubnetID')]"
                 },
                 "privateIPAllocationMethod": "Dynamic"
                 
@@ -82,7 +82,7 @@
             "networkProfile": {
             "networkInterfaces": [
                 {
-                "id": "[resourceId('Microsoft.Network/networkInterfaces', format('{0}-nic', parameters('VeeamBackupServer').name))]"
+                "id": "[resourceId('Microsoft.network/networkInterfaces', concat(parameters('VeeamBackupServer').name,'-nic-01'))]"
                 }
             ]
             },

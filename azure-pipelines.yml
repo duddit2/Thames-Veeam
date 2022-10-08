@@ -8,6 +8,10 @@ trigger:
 
 variables:
   UKSouthVMSubnetID: "/subscriptions/c6666fd5-5c50-4926-8f6b-68b42b3b98b1/resourceGroups/PaulsAzureDeployment/providers/Microsoft.Network/virtualNetworks/VNET-UKSouth-Spoke/subnets/SN-Web"
+  Subscription: "afdc32d4-a9f7-4ea6-9bff-e8c5aa1ed52f"
+  ResourceGroup: "deployments"
+  Location: "UKSouth"
+  ConnectionID: "thamespipeline"
 
 pool:
   vmImage: ubuntu-latest
@@ -17,13 +21,26 @@ steps:
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: 'thamespipeline'
-    subscriptionId: 'afdc32d4-a9f7-4ea6-9bff-e8c5aa1ed52f'
+    azureResourceManagerConnection: variables.ConnectionID
+    subscriptionId: variables.subscription
     action: 'Create Or Update Resource Group'
-    resourceGroupName: 'deployments'
-    location: 'UK South'
+    resourceGroupName: variables.resourceGroup
+    location: variables.location
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/Storage.json'
     csmParametersFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/Storage.parameters.json'
     deploymentMode: 'Incremental'
 
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: variables.ConnectionID
+    subscriptionId: variables.subscription
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: variables.resourceGroup
+    location: variables.location
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/VMs.json'
+    csmParametersFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/VMs.parameters.json'
+    deploymentMode: 'Incremental'
+  

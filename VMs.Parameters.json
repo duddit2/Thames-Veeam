@@ -13,11 +13,11 @@
                 "enableAcceleratedNetworking": false,
                 "zones": 1,
                 "vmSize": "Standard_D2s_v3",
-                "sku": "",
+                "sku": "veeam-backup-replication-v11",
                 "osDiskstoragetype": "",
                 "computerName": "VeeamBRServer01",
-                "adminusername": "",
-                "adminpassword": ""
+                "adminusername": "pjones",
+                "adminpassword": "KindHumanTest1!"
 
             }
         },

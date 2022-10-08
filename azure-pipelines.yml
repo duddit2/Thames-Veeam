@@ -21,11 +21,11 @@ steps:
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: variables.ConnectionID
-    subscriptionId: variables.subscription
+    azureResourceManagerConnection: $(ConnectionID)
+    subscriptionId: $(subscription)
     action: 'Create Or Update Resource Group'
-    resourceGroupName: variables.resourceGroup
-    location: variables.location
+    resourceGroupName: $(resourceGroup)
+    location: $(location)
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/Storage.json'
     csmParametersFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/Storage.parameters.json'
@@ -34,11 +34,11 @@ steps:
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: variables.ConnectionID
-    subscriptionId: variables.subscription
+    azureResourceManagerConnection: $(ConnectionID)
+    subscriptionId: $(subscription)
     action: 'Create Or Update Resource Group'
-    resourceGroupName: variables.resourceGroup
-    location: variables.location
+    resourceGroupName: $(resourceGroup)
+    location: $(location)
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/VMs.json'
     csmParametersFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/VMs.parameters.json'

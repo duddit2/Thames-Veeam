@@ -4,7 +4,7 @@
     "parameters": {
         
         "UKSouthVMSubnetID": {
-            "value": "/subscriptions/c6666fd5-5c50-4926-8f6b-68b42b3b98b1/resourceGroups/PaulsAzureDeployment/providers/Microsoft.Network/virtualNetworks/VNET-UKSouth-Spoke/subnets/SN-Web"
+            "value": "/subscriptions/afdc32d4-a9f7-4ea6-9bff-e8c5aa1ed52f/resourceGroups/deployments/providers/Microsoft.Network/virtualNetworks/PJ-TEST-VNET-001/subnets/default"
         },
         "VeeamBackupServer":{
             "value":  {

@@ -7,11 +7,7 @@ trigger:
 - master
 
 variables:
-  UKSouthVMSubnetID: "/subscriptions/c6666fd5-5c50-4926-8f6b-68b42b3b98b1/resourceGroups/PaulsAzureDeployment/providers/Microsoft.Network/virtualNetworks/VNET-UKSouth-Spoke/subnets/SN-Web"
-  Subscription: "afdc32d4-a9f7-4ea6-9bff-e8c5aa1ed52f"
-  ResourceGroup: "deployments"
-  Location: "UKSouth"
-  ConnectionID: "thamespipeline"
+- Group: 'ThamesVeeam'
 
 
 pool:
@@ -45,5 +41,6 @@ steps:
     csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/VMs.json'
     csmParametersFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/VMs.parameters.json'
     deploymentMode: 'Incremental'
-    overrideParameters: -VMAdminPassword ${{variables.VMAdminPassword}}
+  env:
+    adminPassword: $(adminPassword)
   

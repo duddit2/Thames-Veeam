@@ -9,9 +9,6 @@
         "VeeamBackupServer": {
             "type":"object"
         },
-        "VeeamRepoServer": {
-            "type":"object"
-        },
         "adminPassword": {
             "type": "securestring"
         }

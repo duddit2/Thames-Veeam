@@ -23,25 +23,10 @@
 
                 "osDiskstoragetype": "",
                 "computerName": "VeeamBRServer01",
-                "adminusername": "pjones",
-                "adminpassword": "000!"
+                "adminusername": "pjones"
+                
 
-            }
-        },
-        "VeeamRepoServer":{
-            "value":  {
-                "name": "VeeamRepoServer",
-                "location": "uksouth",
-                "enableAcceleratedNetworking": false,
-                "zones": 1,
-                "vmSize": "Standard_D2s_v3",
-                "sku": "",
-                "osDiskstoragetype": "",
-                "computerName": "",
-                "adminusername": "",
-                "adminpassword": ""
             }
         }
-
     }
 }

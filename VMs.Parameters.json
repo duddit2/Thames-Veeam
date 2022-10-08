@@ -27,7 +27,7 @@
                 "location": "uksouth",
                 "enableAcceleratedNetworking": false,
                 "zones": 1,
-                "vmSize": "",
+                "vmSize": "Standard_D2s_v3",
                 "sku": "",
                 "osDiskstoragetype": "",
                 "computerName": "",

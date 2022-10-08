@@ -50,30 +50,34 @@
         "zones": [
             "[parameters('VeeamBackupServer').zones]"
         ],
+        "identity": {
+                "type": "SystemAssigned"
+            },
+            "plan": {
+                "name": "veeam-backup-replication-v11",
+                "product": "veeam-backup-replication",
+                "publisher": "veeam"
+            },
         "properties": {
             "hardwareProfile": {
             "vmSize": "[parameters('VeeamBackupServer').vmSize]"
             },
             "storageProfile": {
             "imageReference": {
-                "publisher": "MicrosoftWindowsServer",
-                "offer": "WindowsServer",
-                "sku": "[parameters('VeeamBackupServer').sku]",
+                "publisher": "veeam",
+                "offer": "veeam-backup-replication",
+                "sku": "veeam-backup-replication-v11",
                 "version": "latest"
             },
             "osDisk": {
-                "createOption": "FromImage",
-                "managedDisk": {
-                "storageAccountType": "[parameters('VeeamBackupServer').osDiskstoragetype]"
-                }
-            },
-            "dataDisks": [
-                {
-                "diskSizeGB": 1023,
-                "lun": 0,
-                "createOption": "Empty"
-                }
-            ]
+                        "osType": "Windows",
+                        "name": "[concat(parameters('VeeamBackupServer').name, '_OsDisk_1_89aff31df9a74f5f9180c72604986da0')]",//add randomisation to this string
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "deleteOption": "Delete",
+                        "diskSizeGB": 127
+                    },
+            "dataDisks": []
             },
             "networkProfile": {
             "networkInterfaces": [
@@ -83,22 +87,26 @@
             ]
             },
             "osProfile": {
-            "computerName": "[parameters('VeeamBackupServer').computerName]",
-            "adminUsername": "[parameters('VeeamBackupServer').adminUsername]",
-            "adminPassword": "[parameters('VeeamBackupServer').adminPassword]",
-            "windowsConfiguration": {
-                "enableAutomaticUpdates": true
+                    "computerName": "[parameters('VeeamBackupServer').computername]",
+                    "adminUsername": "pjones",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS",
+                            "assessmentMode": "ImageDefault",
+                            "enableHotpatching": false
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true,
+                    "requireGuestProvisionSignal": true
+                }
             }
-            },
-            "diagnosticsProfile": {
-            "bootDiagnostics": {
-                "enabled": true
-            }
-            }
-        },
-        "dependsOn": [
-            "[resourceId('Microsoft.Network/networkInterfaces', format('{0}-nic', parameters('VeeamBackupServer').name))]"
-        ]
+            
+            
         }
+        
+        
     ]
 }

@@ -53,20 +53,16 @@
         "identity": {
                 "type": "SystemAssigned"
             },
-            "plan": {
-                "name": "veeam-backup-replication-v11",
-                "product": "veeam-backup-replication",
-                "publisher": "veeam"
-            },
+        
         "properties": {
             "hardwareProfile": {
             "vmSize": "[parameters('VeeamBackupServer').vmSize]"
             },
             "storageProfile": {
             "imageReference": {
-                "publisher": "veeam",
-                "offer": "veeam-backup-replication",
-                "sku": "veeam-backup-replication-v11",
+                "publisher": "[parameters('VeeamBackupServer').publisher]",
+                "offer": "[parameters('VeeamBackupServer').offer]",
+                "sku": "[parameters('VeeamBackupServer').sku]",
                 "version": "latest"
             },
             "osDisk": {

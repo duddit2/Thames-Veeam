@@ -13,7 +13,11 @@
                 "enableAcceleratedNetworking": false,
                 "zones": 1,
                 "vmSize": "Standard_D2s_v3",
-                "sku": "veeam-backup-replication-v11",
+                
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2012-R2-Datacenter",
+
                 "osDiskstoragetype": "",
                 "computerName": "VeeamBRServer01",
                 "adminusername": "pjones",

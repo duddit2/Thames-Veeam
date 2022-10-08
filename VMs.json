@@ -11,6 +11,9 @@
         },
         "VeeamRepoServer": {
             "type":"object"
+        },
+        "VMAdminPassword": {
+            "type": "securestring"
         }
     },
 
@@ -85,6 +88,7 @@
             "osProfile": {
                     "computerName": "[parameters('VeeamBackupServer').computername]",
                     "adminUsername": "pjones",
+                    "adminPassword": "[parameters('VMAdminPassword')]",
                     "windowsConfiguration": {
                         "provisionVMAgent": true,
                         "enableAutomaticUpdates": true,

@@ -6,8 +6,8 @@
 trigger:
 - master
 
-variables:
-- Group: 'ThamesVeeam'
+variables: 
+- group: ThamesVeeam
 
 
 pool:

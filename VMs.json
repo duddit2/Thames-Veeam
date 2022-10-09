@@ -14,7 +14,7 @@
         },
         "VeeamRepoServer": {
             "type":"object"
-        },
+        }, 
         "adminPassword": {
             "type": "securestring"
         },

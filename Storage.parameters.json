@@ -14,7 +14,7 @@
         "PrimarySA":{
 
                     "value": {
-                        "name": "thamesveeamuksouth001sa",
+                        
                         "kind": "StorageV2",
                         "location": "uksouth",
                         "sku":"Standard_LRS",
@@ -34,7 +34,7 @@
         "SecondarySA":{
 
                     "value": {
-                        "name": "thamesveeamukwest001sa",
+                        
                         "kind": "StorageV2",
                         "location": "ukwest",
                         "sku":"Standard_LRS",

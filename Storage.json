@@ -23,7 +23,9 @@
 
     "variables": {
         "UKSouthShortCode": "UKS",
-        "UKWestShortCode": "UKW"
+        "UKWestShortCode": "UKW",
+        "PrimarySAName": "[tolower(concat('sa',variables('UKSouthShortCode'),parameters('ENV'),parameters('serviceName')))]",
+        "SecondarySAName": "[tolower(concat('sa',variables('UKWestShortCode'),parameters('ENV'),parameters('serviceName')))]"
     },
 
 
@@ -31,7 +33,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-09-01",
-            "name": "[tolower(concat('sa',variables('UKSouthShortCode'),parameters('ENV'),parameters('serviceName')))]",
+            "name": "[variables('PrimarySAName')]",
             "location": "[parameters('PrimarySA').location]",
             "sku": {
                 "name": "[parameters('PrimarySA').sku]",
@@ -78,9 +80,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2021-09-01",
-            "name": "[concat(parameters('PrimarySA').name, '/default')]",
+            "name": "[concat(variables('PrimarySAName'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('PrimarySA').name)]"
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('PrimarySAName'))]"
             ],
             "sku": {
                 "name": "[parameters('PrimarySA').sku]",
@@ -109,9 +111,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/fileServices",
             "apiVersion": "2021-09-01",
-            "name": "[concat(parameters('PrimarySA').name, '/default')]",
+            "name": "[concat(variables('PrimarySAName'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('PrimarySA').name)]"
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('PrimarySAName'))]"
             ],
             "sku": {
                 "name": "[parameters('PrimarySA').sku]",
@@ -128,10 +130,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
             "apiVersion": "2021-09-01",
-            "name": "[concat(parameters('PrimarySA').name,'/default/veeamrepo00',copyIndex())]",
+            "name": "[concat(variables('PrimarySAName'),'/default/veeamrepo00',copyIndex())]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', parameters('PrimarySA').name, 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('PrimarySA').name)]"
+                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', variables('PrimarySAName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('PrimarySAName'))]"
             ],
             "properties": {
                 "accessTier": "Hot",
@@ -146,7 +148,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-09-01",
-            "name": "[tolower(concat('sa',variables('UKWestShortCode'),parameters('ENV'),parameters('serviceName')))]",
+            "name": "[variables('SecondarySAName')]",
             "location": "[parameters('SecondarySA').location]",
             "sku": {
                 "name": "[parameters('SecondarySA').sku]",
@@ -193,9 +195,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2021-09-01",
-            "name": "[concat(parameters('SecondarySA').name, '/default')]",
+            "name": "[concat(variables('SecondarySAName'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('SecondarySA').name)]"
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('SecondarySAName'))]"
             ],
             "sku": {
                 "name": "[parameters('SecondarySA').sku]",

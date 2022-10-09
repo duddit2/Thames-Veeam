@@ -3,8 +3,14 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         
-        "UKSouthVMSubnetID": {
-            "value": "/subscriptions/afdc32d4-a9f7-4ea6-9bff-e8c5aa1ed52f/resourceGroups/deployments/providers/Microsoft.Network/virtualNetworks/PJ-TEST-VNET-001/subnets/default"
+        "ENV": {
+            "value": "" 
+        },
+        "PrimarySubnetString": {
+            "value": ""
+        },
+        "adminUsername": {
+            "value": "" 
         },
         "adminPassword": {
             "value": "" 
@@ -12,6 +18,21 @@
         "VeeamBackupServer":{
             "value":  {
                 "name": "VeeamBackupServer",
+                "location": "uksouth",
+                "enableAcceleratedNetworking": false,
+                "zones": 1,
+                "vmSize": "Standard_D2s_v3",
+                "publisher": "veeam",
+                "offer": "veeam-backup-replication",
+                "sku": "veeam-backup-replication-v11",
+                "osDiskstoragetype": "",
+                "computerName": "VeeamBRServer01",
+                "adminusername": "pjones"
+            }
+        },
+        "VeeamRepoServer":{
+            "value":  {
+                "name": "VeeamRepoServer",
                 "location": "uksouth",
                 "enableAcceleratedNetworking": false,
                 "zones": 1,

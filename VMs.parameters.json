@@ -7,7 +7,7 @@
             "value": "/subscriptions/afdc32d4-a9f7-4ea6-9bff-e8c5aa1ed52f/resourceGroups/deployments/providers/Microsoft.Network/virtualNetworks/PJ-TEST-VNET-001/subnets/default"
         },
         "adminPassword": {
-            "value": "huhwicbcibwdhicbwdibiwhdbhdwbjhwbd" 
+            "value": "" 
         },
         "VeeamBackupServer":{
             "value":  {
@@ -16,16 +16,12 @@
                 "enableAcceleratedNetworking": false,
                 "zones": 1,
                 "vmSize": "Standard_D2s_v3",
-                
-                "publisher": "MicrosoftWindowsServer",
-                "offer": "WindowsServer",
-                "sku": "2012-R2-Datacenter",
-
+                "publisher": "veeam",
+                "offer": "veeam-backup-replication",
+                "sku": "veeam-backup-replication-v11",
                 "osDiskstoragetype": "",
                 "computerName": "VeeamBRServer01",
                 "adminusername": "pjones"
-                
-
             }
         }
     }

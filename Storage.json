@@ -24,8 +24,8 @@
     "variables": {
         "UKSouthShortCode": "UKS",
         "UKWestShortCode": "UKW",
-        "PrimarySAName": "[tolower(concat('sa',variables('UKSouthShortCode'),parameters('ENV'),parameters('serviceName')))]",
-        "SecondarySAName": "[tolower(concat('sa',variables('UKWestShortCode'),parameters('ENV'),parameters('serviceName')))]"
+        "PrimarySAName": "[concat('sa',variables('UKSouthShortCode'),parameters('ENV'),parameters('serviceName'))]",
+        "SecondarySAName": "[concat('sa',variables('UKWestShortCode'),parameters('ENV'),parameters('serviceName'))]"
     },
 
 
@@ -33,7 +33,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-09-01",
-            "name": "[variables('PrimarySAName')]",
+            "name": "[tolower(variables('PrimarySAName'))]",
             "location": "[parameters('PrimarySA').location]",
             "sku": {
                 "name": "[parameters('PrimarySA').sku]",
@@ -80,7 +80,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2021-09-01",
-            "name": "[concat(variables('PrimarySAName'), '/default')]",
+            "name": "[tolower(concat(variables('PrimarySAName'), '/default'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('PrimarySAName'))]"
             ],
@@ -111,7 +111,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts/fileServices",
             "apiVersion": "2021-09-01",
-            "name": "[concat(variables('PrimarySAName'), '/default')]",
+            "name": "[tolower(concat(variables('PrimarySAName'), '/default'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('PrimarySAName'))]"
             ],
@@ -148,7 +148,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-09-01",
-            "name": "[variables('SecondarySAName')]",
+            "name": "[tolower(variables('SecondarySAName'))]",
             "location": "[parameters('SecondarySA').location]",
             "sku": {
                 "name": "[parameters('SecondarySA').sku]",
@@ -195,7 +195,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2021-09-01",
-            "name": "[concat(variables('SecondarySAName'), '/default')]",
+            "name": "[tolower(concat(variables('SecondarySAName'), '/default'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('SecondarySAName'))]"
             ],

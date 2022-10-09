@@ -9,6 +9,9 @@
         "VeeamBackupServer": {
             "type":"object"
         },
+        "VeeamRepoServer": {
+            "type":"object"
+        },
         "adminPassword": {
             "type": "securestring"
         }
@@ -90,6 +93,95 @@
             
             "osProfile": {
                     "computerName": "[parameters('VeeamBackupServer').computername]",
+                    "adminUsername": "pjones",
+                    "adminPassword": "[parameters('adminPassword')]",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS",
+                            "assessmentMode": "ImageDefault",
+                            "enableHotpatching": false
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true
+                }
+            }
+            
+            
+        },
+        {
+        "type": "Microsoft.Network/networkInterfaces",
+        "apiVersion": "2020-11-01",
+        "name": "[concat(parameters('VeeamRepoServer').name,'-nic-01')]",
+        "location": "[parameters('VeeamRepoServer').location]",
+        "properties": {
+            "ipConfigurations": [
+            {
+                "name": "ipconfig1",
+                "properties": {
+                "subnet": {
+                    "id": "[parameters('UKSouthVMSubnetID')]"
+                },
+                "privateIPAllocationMethod": "Dynamic"
+                
+                }
+            }
+            ],
+            "enableAcceleratedNetworking": "[parameters('VeeamRepoServer').enableAcceleratedNetworking]"
+            
+        }
+        
+        },
+        {
+        "type": "Microsoft.Compute/virtualMachines",
+        "apiVersion": "2021-07-01",
+        "name": "[parameters('VeeamRepoServer').name]",
+        "location": "[parameters('VeeamRepoServer').location]",
+        "zones": [
+            "[parameters('VeeamRepoServer').zones]"
+        ],
+        "identity": {
+                "type": "SystemAssigned"
+            },
+        "plan": {
+                "name": "[parameters('VeeamRepoServer').sku]",
+                "product": "[parameters('VeeamRepoServer').offer]",
+                "publisher": "[parameters('VeeamRepoServer').publisher]"
+            },
+        "properties": {
+            "hardwareProfile": {
+            "vmSize": "[parameters('VeeamRepoServer').vmSize]"
+            },
+            "storageProfile": {
+            "imageReference": {
+                "publisher": "[parameters('VeeamRepoServer').publisher]",
+                "offer": "[parameters('VeeamRepoServer').offer]",
+                "sku": "[parameters('VeeamRepoServer').sku]",
+                "version": "latest"
+            },
+            
+            "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('VeeamRepoServer').name, '_OsDisk_1_89aff31df9a74f5f9180c72604986da0')]",//add randomisation to this string
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "deleteOption": "Delete",
+                        "diskSizeGB": 127
+                    },
+            "dataDisks": []
+            },
+            "networkProfile": {
+            "networkInterfaces": [
+                {
+                "id": "[resourceId('Microsoft.network/networkInterfaces', concat(parameters('VeeamRepoServer').name,'-nic-01'))]"
+                }
+            ]
+            },
+            
+            "osProfile": {
+                    "computerName": "[parameters('VeeamRepoServer').computername]",
                     "adminUsername": "pjones",
                     "adminPassword": "[parameters('adminPassword')]",
                     "windowsConfiguration": {

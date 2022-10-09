@@ -23,6 +23,21 @@
                 "computerName": "VeeamBRServer01",
                 "adminusername": "pjones"
             }
+        },
+        "VeeamRepoServer":{
+            "value":  {
+                "name": "VeeamRepoServer",
+                "location": "uksouth",
+                "enableAcceleratedNetworking": false,
+                "zones": 1,
+                "vmSize": "Standard_D2s_v3",
+                "publisher": "veeam",
+                "offer": "veeam-backup-replication",
+                "sku": "veeam-backup-replication-v11",
+                "osDiskstoragetype": "",
+                "computerName": "VeeamBRServer01",
+                "adminusername": "pjones"
+            }
         }
     }
 }

@@ -3,7 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         
-        "UKSouthVMSubnetID": {
+        "ENV": {
+            "type": "string"    
+        },
+        "PrimarySubnetString": {
             "type":"string"
         },
         "VeeamBackupServer": {
@@ -14,10 +17,14 @@
         },
         "adminPassword": {
             "type": "securestring"
+        },
+        "adminUsername": {
+            "type": "securestring"
         }
     },
 
     "variables": {
+        "VMName": "[concat('VMW',parameters('ENV'),'VEM01')]"
     },
 
     "resources": [
@@ -33,7 +40,7 @@
                 "name": "ipconfig1",
                 "properties": {
                 "subnet": {
-                    "id": "[parameters('UKSouthVMSubnetID')]"
+                    "id": "[parameters('PrimarySubnetString')]"
                 },
                 "privateIPAllocationMethod": "Dynamic"
                 
@@ -93,7 +100,7 @@
             
             "osProfile": {
                     "computerName": "[parameters('VeeamBackupServer').computername]",
-                    "adminUsername": "pjones",
+                    "adminUsername": "[parameters('adminUsername')]",
                     "adminPassword": "[parameters('adminPassword')]",
                     "windowsConfiguration": {
                         "provisionVMAgent": true,
@@ -122,7 +129,7 @@
                 "name": "ipconfig1",
                 "properties": {
                 "subnet": {
-                    "id": "[parameters('UKSouthVMSubnetID')]"
+                    "id": "[parameters('PrimarySubnetString')]"
                 },
                 "privateIPAllocationMethod": "Dynamic"
                 
@@ -182,7 +189,7 @@
             
             "osProfile": {
                     "computerName": "[parameters('VeeamRepoServer').computername]",
-                    "adminUsername": "pjones",
+                    "adminUsername": "[parameters('adminUsername')]",
                     "adminPassword": "[parameters('adminPassword')]",
                     "windowsConfiguration": {
                         "provisionVMAgent": true,

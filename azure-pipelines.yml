@@ -11,13 +11,6 @@ pool:
 
 steps:
 
-- task: AzureCLI@2
-  inputs:
-    
-    azureSubscription: '$(subscription)'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: 'az vm image accept-terms --urn veeam:veeam-backup-replication:veeam-backup-replication-v11:11.1.2'
 
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
@@ -31,7 +24,7 @@ steps:
     csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/Storage.json'
     csmParametersFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/Storage.parameters.json'
     deploymentMode: 'Incremental'
-   
+  
 
 
 - task: AzureResourceManagerTemplateDeployment@3

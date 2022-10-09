@@ -5,7 +5,13 @@
         "PrimarySubnetString":{
                     "value": ""
         },
-        "sa01":{
+        "ENV": {
+            "value": "" 
+        },
+        "serviceName": {
+            "value": "" 
+        },
+        "PrimarySA":{
 
                     "value": {
                         "name": "thamesveeamuksouth001sa",
@@ -25,7 +31,7 @@
                         
                     }
         },
-        "sa02":{
+        "SecondarySA":{
 
                     "value": {
                         "name": "thamesveeamukwest001sa",

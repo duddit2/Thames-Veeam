@@ -25,6 +25,8 @@ steps:
     csmParametersFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/Storage.parameters.json'
     deploymentMode: 'Incremental'
     overrideParameters: -PrimarySubnetString $(variables.PrimarySubnetString)
+                        -serviceName $(variables.serviceName)
+                        -ENV $(variables.ENV)
   
 
 

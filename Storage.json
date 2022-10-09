@@ -2,10 +2,16 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "sa01": {
+        "ENV": {
+            "type": "string"
+        },
+        "serviceName": {
+            "type": "string"
+        },
+        "PrimarySA": {
             "type":"object"
         },
-        "sa02": {
+        "SecondarySA": {
             "type":"object"
         },
         
@@ -16,7 +22,8 @@
 
 
     "variables": {
-        "StorageAccountName": "[concat('sa')]"  //NEED TO FINISH THIS
+        "UKSouthShortCode": "UKS",
+        "UKWestShortCode": "UKW"
     },
 
 
@@ -24,21 +31,21 @@
         {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-09-01",
-            "name": "[parameters('sa01').name]",
-            "location": "[parameters('sa01').location]",
+            "name": "[tolower(concat('sa',variables('UKSouthShortCode'),parameters('ENV'),parameters('serviceName')))]",
+            "location": "[parameters('PrimarySA').location]",
             "sku": {
-                "name": "[parameters('sa01').sku]",
+                "name": "[parameters('PrimarySA').sku]",
                 "tier": "Standard"
             },
-            "kind": "[parameters('sa01').kind]",
+            "kind": "[parameters('PrimarySA').kind]",
             "properties": {
-                "dnsEndpointType": "[parameters('sa01').dnsEndpointType]",
-                "defaultToOAuthAuthentication": "[parameters('sa01').defaultToOAuthAuthentication]",
-                "publicNetworkAccess": "[parameters('sa01').publicNetworkAccess]",
-                "minimumTlsVersion": "[parameters('sa01').minimumTlsVersion]",
-                "allowBlobPublicAccess": "[parameters('sa01').allowBlobPublicAccess]",
-                "allowSharedKeyAccess": "[parameters('sa01').allowSharedKeyAccess]",
-                "largeFileSharesState": "[parameters('sa01').largeFileSharesState]",
+                "dnsEndpointType": "[parameters('PrimarySA').dnsEndpointType]",
+                "defaultToOAuthAuthentication": "[parameters('PrimarySA').defaultToOAuthAuthentication]",
+                "publicNetworkAccess": "[parameters('PrimarySA').publicNetworkAccess]",
+                "minimumTlsVersion": "[parameters('PrimarySA').minimumTlsVersion]",
+                "allowBlobPublicAccess": "[parameters('PrimarySA').allowBlobPublicAccess]",
+                "allowSharedKeyAccess": "[parameters('PrimarySA').allowSharedKeyAccess]",
+                "largeFileSharesState": "[parameters('PrimarySA').largeFileSharesState]",
                 "networkAcls": {
                     "bypass": "AzureServices",
                     "virtualNetworkRules": [
@@ -65,18 +72,18 @@
                     },
                     "keySource": "Microsoft.Storage"
                 },
-                "accessTier": "[parameters('sa01').accesstier]"
+                "accessTier": "[parameters('PrimarySA').accesstier]"
             }
         },
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2021-09-01",
-            "name": "[concat(parameters('sa01').name, '/default')]",
+            "name": "[concat(parameters('PrimarySA').name, '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('sa01').name)]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('PrimarySA').name)]"
             ],
             "sku": {
-                "name": "[parameters('sa01').sku]",
+                "name": "[parameters('PrimarySA').sku]",
                 "tier": "Standard"
             },
             "properties": {
@@ -102,12 +109,12 @@
         {
             "type": "Microsoft.Storage/storageAccounts/fileServices",
             "apiVersion": "2021-09-01",
-            "name": "[concat(parameters('sa01').name, '/default')]",
+            "name": "[concat(parameters('PrimarySA').name, '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('sa01').name)]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('PrimarySA').name)]"
             ],
             "sku": {
-                "name": "[parameters('sa01').sku]",
+                "name": "[parameters('PrimarySA').sku]",
                 "tier": "Standard"
             },
             "properties": {
@@ -121,10 +128,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
             "apiVersion": "2021-09-01",
-            "name": "[concat(parameters('sa01').name,'/default/veeamrepo00',copyIndex())]",
+            "name": "[concat(parameters('PrimarySA').name,'/default/veeamrepo00',copyIndex())]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', parameters('sa01').name, 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('sa01').name)]"
+                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', parameters('PrimarySA').name, 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('PrimarySA').name)]"
             ],
             "properties": {
                 "accessTier": "Hot",
@@ -139,21 +146,21 @@
         {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-09-01",
-            "name": "[parameters('sa02').name]",
-            "location": "[parameters('sa02').location]",
+            "name": "[tolower(concat('sa',variables('UKWestShortCode'),parameters('ENV'),parameters('serviceName')))]",
+            "location": "[parameters('SecondarySA').location]",
             "sku": {
-                "name": "[parameters('sa02').sku]",
+                "name": "[parameters('SecondarySA').sku]",
                 "tier": "Standard"
             },
-            "kind": "[parameters('sa02').kind]",
+            "kind": "[parameters('SecondarySA').kind]",
             "properties": {
-                "dnsEndpointType": "[parameters('sa02').dnsEndpointType]",
-                "defaultToOAuthAuthentication": "[parameters('sa02').defaultToOAuthAuthentication]",
-                "publicNetworkAccess": "[parameters('sa02').publicNetworkAccess]",
-                "minimumTlsVersion": "[parameters('sa02').minimumTlsVersion]",
-                "allowBlobPublicAccess": "[parameters('sa02').allowBlobPublicAccess]",
-                "allowSharedKeyAccess": "[parameters('sa02').allowSharedKeyAccess]",
-                "largeFileSharesState": "[parameters('sa02').largeFileSharesState]",
+                "dnsEndpointType": "[parameters('SecondarySA').dnsEndpointType]",
+                "defaultToOAuthAuthentication": "[parameters('SecondarySA').defaultToOAuthAuthentication]",
+                "publicNetworkAccess": "[parameters('SecondarySA').publicNetworkAccess]",
+                "minimumTlsVersion": "[parameters('SecondarySA').minimumTlsVersion]",
+                "allowBlobPublicAccess": "[parameters('SecondarySA').allowBlobPublicAccess]",
+                "allowSharedKeyAccess": "[parameters('SecondarySA').allowSharedKeyAccess]",
+                "largeFileSharesState": "[parameters('SecondarySA').largeFileSharesState]",
                 "networkAcls": {
                     "bypass": "AzureServices",
                     "virtualNetworkRules": [
@@ -180,18 +187,18 @@
                     },
                     "keySource": "Microsoft.Storage"
                 },
-                "accessTier": "[parameters('sa02').accesstier]"
+                "accessTier": "[parameters('SecondarySA').accesstier]"
             }
         },
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2021-09-01",
-            "name": "[concat(parameters('sa02').name, '/default')]",
+            "name": "[concat(parameters('SecondarySA').name, '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('sa02').name)]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('SecondarySA').name)]"
             ],
             "sku": {
-                "name": "[parameters('sa02').sku]",
+                "name": "[parameters('SecondarySA').sku]",
                 "tier": "Standard"
             },
             "properties": {

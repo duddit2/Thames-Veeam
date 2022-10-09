@@ -24,7 +24,7 @@
     "variables": {
         "UKSouthShortCode": "UKS",
         "UKWestShortCode": "UKW",
-        "PrimarySAName": "[concat('sa',variables('UKSouthShortCode'),parameters('ENV'),parameters('serviceName'))]",
+        "PrimarySAName": "[concat('sauks',parameters('ENV'),parameters('serviceName'))]",
         "SecondarySAName": "[concat('sa',variables('UKWestShortCode'),parameters('ENV'),parameters('serviceName'))]"
     },
 

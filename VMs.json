@@ -65,6 +65,11 @@
                 "sku": "[parameters('VeeamBackupServer').sku]",
                 "version": "latest"
             },
+            "plan": {
+                "name": "[parameters('VeeamBackupServer').sku]",
+                "product": "[parameters('VeeamBackupServer').offer]",
+                "publisher": "[parameters('VeeamBackupServer').publisher]"
+            },
             "osDisk": {
                         "osType": "Windows",
                         "name": "[concat(parameters('VeeamBackupServer').name, '_OsDisk_1_89aff31df9a74f5f9180c72604986da0')]",//add randomisation to this string

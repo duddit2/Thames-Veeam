@@ -53,7 +53,11 @@
         "identity": {
                 "type": "SystemAssigned"
             },
-        
+        "plan": {
+                "name": "[parameters('VeeamBackupServer').sku]",
+                "product": "[parameters('VeeamBackupServer').offer]",
+                "publisher": "[parameters('VeeamBackupServer').publisher]"
+            },
         "properties": {
             "hardwareProfile": {
             "vmSize": "[parameters('VeeamBackupServer').vmSize]"
@@ -83,11 +87,7 @@
                 }
             ]
             },
-            "plan": {
-                "name": "[parameters('VeeamBackupServer').sku]",
-                "product": "[parameters('VeeamBackupServer').offer]",
-                "publisher": "[parameters('VeeamBackupServer').publisher]"
-            },
+            
             "osProfile": {
                     "computerName": "[parameters('VeeamBackupServer').computername]",
                     "adminUsername": "pjones",

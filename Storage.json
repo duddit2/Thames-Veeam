@@ -22,10 +22,8 @@
 
 
     "variables": {
-        //"UKSouthShortCode": "UKS",
-        //"UKWestShortCode": "UKW",
-        "PrimarySAName": "sauksprdveeambr",
-        "SecondarySAName": "saukwprdveeambr"
+        "PrimarySAName": "sauksprdveeambr001",
+        "SecondarySAName": "saukwprdveeambr001"
     },
 
 
@@ -33,7 +31,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-09-01",
-            "name": "[tolower(variables('PrimarySAName'))]",
+            "name": "[variables('PrimarySAName')]",
             "location": "[parameters('PrimarySA').location]",
             "sku": {
                 "name": "[parameters('PrimarySA').sku]",
@@ -80,7 +78,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2021-09-01",
-            "name": "[tolower(concat(variables('PrimarySAName'), '/default'))]",
+            "name": "[concat(variables('PrimarySAName'), '/default')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('PrimarySAName'))]"
             ],
@@ -111,7 +109,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts/fileServices",
             "apiVersion": "2021-09-01",
-            "name": "[tolower(concat(variables('PrimarySAName'), '/default'))]",
+            "name": "[concat(variables('PrimarySAName'), '/default')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('PrimarySAName'))]"
             ],

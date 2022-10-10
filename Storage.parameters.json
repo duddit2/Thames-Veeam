@@ -6,10 +6,10 @@
                     "value": "/subscriptions/afdc32d4-a9f7-4ea6-9bff-e8c5aa1ed52f/resourceGroups/deployments/providers/Microsoft.Network/virtualNetworks/PJ-TEST-VNET-001/subnets/default"
         },
         "ENV": {
-            "value": "" 
+            "value": "prd" 
         },
         "serviceName": {
-            "value": "" 
+            "value": "veeambr" 
         },
         "PrimarySA":{
 

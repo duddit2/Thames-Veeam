@@ -24,8 +24,7 @@ steps:
     csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/Storage.json'
     csmParametersFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/Storage.parameters.json'
     deploymentMode: 'Incremental'
-    overrideParameters: -serviceName $(variables.serviceName)
-                        -ENV $(variables.ENV)
+    overrideParameters: 
   
 
 

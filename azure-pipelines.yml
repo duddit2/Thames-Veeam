@@ -4,6 +4,7 @@ trigger:
 
 variables: 
 - group: ThamesVeeam
+- group: VeeamSecrets
 
 
 pool:

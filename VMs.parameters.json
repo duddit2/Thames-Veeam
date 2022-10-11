@@ -6,6 +6,9 @@
         "ENV": {
             "value": "" 
         },
+        "serviceName": {
+            "value": "veeambr"
+        },
         "PrimarySubnetString": {
             "value": ""
         },

@@ -6,6 +6,9 @@
         "ENV": {
             "type": "string"    
         },
+        "serviceName": {
+            "type": "string"
+        },
         "PrimarySubnetString": {
             "type":"string"
         },

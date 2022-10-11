@@ -117,6 +117,9 @@
                     "secrets": [],
                     "allowExtensionOperations": true
                 }
+            },
+            "tags": {
+                "serviceName": "[parameters('serviceName')]"
             }
             
             
@@ -206,8 +209,10 @@
                     "secrets": [],
                     "allowExtensionOperations": true
                 }
+            },
+            "tags": {
+                "serviceName": "[parameters('serviceName')]"
             }
-            
             
         }
         

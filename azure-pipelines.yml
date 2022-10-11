@@ -43,7 +43,6 @@ steps:
     deploymentMode: 'Incremental'
     overrideParameters: -adminUsername $(variables.adminUsername)
                         -adminPassword $(variables.adminPassword) 
-                        -PrimarySubnetString $(variables.PrimarySubnetString)
                         -serviceName $(variables.serviceName)
                         -ENV $(variables.ENV)
   

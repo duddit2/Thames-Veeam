@@ -22,7 +22,7 @@
             "type": "securestring"
         },
         "adminUsername": {
-            "type": "securestring"
+            "type": "string"
         }
     },
 

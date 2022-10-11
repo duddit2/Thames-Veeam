@@ -42,6 +42,6 @@ steps:
     csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/VMs.json'
     csmParametersFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/VMs.parameters.json'
     deploymentMode: 'Incremental'
-    overrideParameters: -adminPassword ${variables.adminPassword} -serviceName ${variables.serviceName} -ENV ${variables.ENV}
+    overrideParameters: -serviceName ${{variables.serviceName}}
   
 

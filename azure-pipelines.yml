@@ -25,7 +25,7 @@ steps:
     csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/Storage.json'
     csmParametersFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/Storage.parameters.json'
     deploymentMode: 'Incremental'
-    overrideParameters: 
+    overrideParameters: -adminPassword ${DEFAULT_ADMIN_PASSWORD}
   
 
 
@@ -42,6 +42,6 @@ steps:
     csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/VMs.json'
     csmParametersFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/VMs.parameters.json'
     deploymentMode: 'Incremental'
-    overrideParameters: -adminPassword $(variables.adminPassword) -serviceName ${{variables.serviceName}} -ENV $(variables.ENV)
+    overrideParameters: -adminPassword ${variables.adminPassword} -serviceName ${variables.serviceName} -ENV ${variables.ENV}
   
 

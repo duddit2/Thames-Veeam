@@ -137,8 +137,8 @@
                 "name": "shares",
                 "count": 4
             }
-        }
-        /* {
+        },
+        {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-09-01",
             "name": "[tolower(variables('SecondarySAName'))]",
@@ -198,7 +198,7 @@
             },
             "properties": {
                 "cors": {
-                    "corsRules": []
+                    "corsRules": [] 
                 },
                 "deleteRetentionPolicy": {
                     "allowPermanentDelete": false,
@@ -215,6 +215,6 @@
                     "enabled": false
                 }
             }
-        } */
+        }
     ]
 }

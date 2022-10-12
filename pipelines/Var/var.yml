@@ -1,6 +1,6 @@
 variables:
   #common
-  releaseSubscription: afdc32d4-a9f7-4ea6-9bff-e8c5aa1ed52f
+  releaseSubscription: thamespipeline
   resourceGroupName: deployments
   location: uksouth
   PrimaryLocation: uksouth

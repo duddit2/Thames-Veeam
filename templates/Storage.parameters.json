@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "PrimarySubnetString":{
+                    "value": "/subscriptions/afdc32d4-a9f7-4ea6-9bff-e8c5aa1ed52f/resourceGroups/deployments/providers/Microsoft.Network/virtualNetworks/PJ-TEST-VNET-001/subnets/default"
+        },     
+        "name": {
+            "value": "test" 
+        },
+        "location": {
+            "value": "" 
+        },
+        "accesstier": {
+            "value": "" 
+        },
+        "largeFileSharesState": {
+            "value": "" 
+        },
+        "publicNetworkAccess": {
+            "value": "" 
+        },
+        "sku": {
+            "value": "" 
+        }
+    }
+}

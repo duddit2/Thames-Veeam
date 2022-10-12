@@ -50,7 +50,7 @@
                 }
             }
             ],
-            "enableAcceleratedNetworking": "[parameters('VeeamBackupServer').enableAcceleratedNetworking]"
+            "enableAcceleratedNetworking": false
             
         }
         
@@ -61,7 +61,7 @@
         "name": "[parameters('VeeamBackupServer').name]",
         "location": "[parameters('VeeamBackupServer').location]",
         "zones": [
-            "[parameters('VeeamBackupServer').zones]"
+            "1"
         ],
         "identity": {
                 "type": "SystemAssigned"
@@ -142,7 +142,7 @@
                 }
             }
             ],
-            "enableAcceleratedNetworking": "[parameters('VeeamRepoServer').enableAcceleratedNetworking]"
+            "enableAcceleratedNetworking": false
             
         }
         
@@ -153,7 +153,7 @@
         "name": "[parameters('VeeamRepoServer').name]",
         "location": "[parameters('VeeamRepoServer').location]",
         "zones": [
-            "[parameters('VeeamRepoServer').zones]"
+            "1"
         ],
         "identity": {
                 "type": "SystemAssigned"

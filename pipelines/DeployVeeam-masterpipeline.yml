@@ -1,0 +1,32 @@
+resources:
+  - repo: self
+
+trigger: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+- template: Var/var.yml
+
+
+stages:
+
+- stage: DeployStorage
+  displayName: deploy_Storage
+  jobs:
+  - template: Deploy/storage.yml #Deploy Storage
+    parameters:
+      PrimaryStorageName: ${{ variables.PrimaryStorageName }}
+      SecondaryStorageName: ${{ variables.SecondaryStorageName }}
+      releaseSubscription: ${{ variables.releaseSubscription }}
+      resourceGroupName: ${{ variables.resourceGroupName }}
+      PrimaryLocation: ${{ variables.location }}
+      SecondaryLocation: ${{ variables.avssku }}
+      sku: ${{ variables.sku }}
+      accesstier: ${{ variables.accesstier }}
+      publicNetworkAccess: ${{ variables.publicNetworkAccess }}
+      largeFileSharesState: ${{ variables.largeFileSharesState }}
+      PrimarySubnetString: ${{ variables.PrimarySubnetString }}
+      
+

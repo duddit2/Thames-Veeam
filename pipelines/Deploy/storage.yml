@@ -1,0 +1,66 @@
+parameters:
+  releaseSubscription: ""
+  resourceGroupName: ""
+  PrimaryStorageName: ""
+  SecondaryStorageName: ""
+  PrimaryLocation: ""
+  SecondaryLocation: ""
+  sku: ""
+  accesstier: ""
+  publicNetworkAccess: ""
+  largeFileSharesState: ""
+  PrimarySubnetString: ""
+
+
+jobs:
+- job: depl_Primary-Storage
+  dependsOn:
+  steps:
+  - task: Bash@3
+    inputs: 
+        targetType: 'inline'
+        script: echo ${{ parameters.PrimaryStorageName }}
+  - task: AzureResourceGroupDeployment@2
+    displayName: "Deploy StorageAccount"
+    inputs:
+      azureSubscription: '${{ parameters.releaseSubscription }}'
+      resourceGroupName: '${{ parameters.resourceGroupName }}'
+      location: ${{ parameters.location }}
+      #csmFile: $(Build.SourcesDirectory)/AVS/Templates/vnet.json
+      csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/templates/master/Storage.json'
+      overrideParameters:  '-name: "${{ parameters.PrimaryStorageName }}"
+                            -Location "${{ parameters.PrimaryLocation }}"
+                            -resourceGroup "${{ parameters.resourceGroupName }}"
+                            -sku "${{ parameters.sku }}"
+                            -accesstier: "{{ parameters.accesstier }}"
+                            -publicNetworkAccess: "{{ parameters.publicNetworkAccess }}"
+                            -largeFileSharesState: "{{ parameters.largeFileSharesState }}"
+                            -PrimarySubnetString: "{{ parameters.PrimarySubnetString }}"'
+
+      deploymentMode: Incremental
+
+- job: depl_Secondary-Storage
+  dependsOn:
+  steps:
+  - task: Bash@3
+    inputs: 
+        targetType: 'inline'
+        script: echo ${{ parameters.SecondaryStorageName }}
+  - task: AzureResourceGroupDeployment@2
+    displayName: "Deploy StorageAccount"
+    inputs:
+      azureSubscription: '${{ parameters.releaseSubscription }}'
+      resourceGroupName: '${{ parameters.resourceGroupName }}'
+      location: ${{ parameters.location }}
+      #csmFile: $(Build.SourcesDirectory)/AVS/Templates/vnet.json
+      csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/templates/master/Storage.json'
+      overrideParameters:  '-name: "${{ parameters.SecondaryStorageName }}"
+                            -Location "${{ parameters.SecondaryLocation }}"
+                            -resourceGroup "${{ parameters.resourceGroupName }}"
+                            -sku "${{ parameters.sku }}"
+                            -accesstier: "{{ parameters.accesstier }}"
+                            -publicNetworkAccess: "{{ parameters.publicNetworkAccess }}"
+                            -largeFileSharesState: "{{ parameters.largeFileSharesState }}"
+                            -PrimarySubnetString: "{{ parameters.PrimarySubnetString }}"'
+
+      deploymentMode: Incremental

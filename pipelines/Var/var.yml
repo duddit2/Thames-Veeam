@@ -1,0 +1,34 @@
+variables:
+  #common
+  releaseSubscription: afdc32d4-a9f7-4ea6-9bff-e8c5aa1ed52f
+  resourceGroupName: deployments
+  location: uksouth
+  PrimaryLocation: uksouth
+  SecondaryLocation: ukwest
+  ServiceName: Veeambr 
+  Env: PRD
+  PrimarySubnetString: /subscriptions/afdc32d4-a9f7-4ea6-9bff-e8c5aa1ed52f/resourceGroups/deployments/providers/Microsoft.Network/virtualNetworks/PJ-TEST-VNET-001/subnets/default
+  
+  #storage
+  PrimaryStorageName: sauksprdveeambr
+  SecondaryStorageName: saukwprdveeambr
+  sku: Standard_LRS
+  accesstier: Hot
+  publicNetworkAccess: Dissabled
+  largeFileSharesState: true
+
+
+  #VMs
+  #BRServer
+  BRServerName: VMWPRDVEEAMBR
+  BRServerSize: Standard_D2s_v3
+  #RepoServer
+  RepoServerName: VMWPRDVEEAMRP
+  RepoServerSize: Standard_D2s_v3
+
+  
+  
+
+
+  
+  #sql

@@ -1,0 +1,28 @@
+parameters:
+  releaseSubscription: ""
+  resourceGroupName: ""
+  PrimaryLocation: ""
+  SecondaryLocation: ""
+
+
+jobs:
+- job: depl_VMs
+  dependsOn:
+  steps:
+  - task: Bash@3
+    inputs: 
+        targetType: 'inline'
+        script: echo ${{ parameters.virtualNetworkName }}
+  - task: AzureResourceGroupDeployment@2
+    displayName: "Deploy vnetSimple"
+    inputs:
+      azureSubscription: '${{ parameters.releaseSubscription }}'
+      resourceGroupName: '${{ parameters.resourceGroupName }}'
+      location: ${{ parameters.location }}
+      #csmFile: $(Build.SourcesDirectory)/AVS/Templates/vnet.json
+      csmFileLink: 'https://raw.githubusercontent.com/duddit2/Thames-Veeam/master/VMs.json'
+      overrideParameters: '-PrimaryLocation "${{ parameters.PrimaryLocation"
+                           -SecondaryLocation "${{ parameters.SecondaryLocation
+                           -resourceGroup "${{ parameters.resourceGroupName }}"'
+
+      deploymentMode: Incremental

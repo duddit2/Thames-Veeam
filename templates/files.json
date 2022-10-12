@@ -1,0 +1,18 @@
+{
+    "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+    "apiVersion": "2021-09-01",
+    "name": "[concat(parameters('name'),'/default/veeamrepo00',copyIndex())]",
+    "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/fileServices', parameters('name'), 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('name'))]"
+    ],
+    "properties": {
+        "accessTier": "Hot",
+        "shareQuota": 102400,
+        "enabledProtocols": "SMB"
+    },
+    "copy": {
+        "name": "shares",
+        "count": 4
+    }
+}

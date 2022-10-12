@@ -22,7 +22,7 @@
             "value":  {
                 "name": "VeeamBackupServer",
                 "location": "uksouth",
-                "enableAcceleratedNetworking": false,
+                
                 "zones": 1,
                 "vmSize": "Standard_D2s_v3",
                 "publisher": "veeam",
@@ -36,8 +36,6 @@
             "value":  {
                 "name": "VeeamRepoServer",
                 "location": "uksouth",
-                "enableAcceleratedNetworking": false,
-                "zones": 1,
                 "vmSize": "Standard_D2s_v3",
                 "publisher": "veeam",
                 "offer": "veeam-backup-replication",

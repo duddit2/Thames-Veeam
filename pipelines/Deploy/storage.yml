@@ -13,7 +13,7 @@ parameters:
 
 
 jobs:
-- job: depl_storage
+- job: depl_primary_storage
   dependsOn:
   steps:
   - task: Bash@3
@@ -39,7 +39,7 @@ jobs:
 
       deploymentMode: Incremental
 
-- job: depl_storage
+- job: depl_secondary_storage
   dependsOn:
   steps:
   - task: Bash@3
